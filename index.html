@@ -91,14 +91,14 @@
     .nav-mobile{display:none;align-items:center;gap:4px;}
     .nav-mobile a{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;background:var(--frost);border:1px solid var(--border);color:var(--muted);text-decoration:none;transition:color .22s,background .22s,border-color .22s;}
     .nav-mobile a:hover,.nav-mobile a.active{color:var(--teal);background:var(--teal-d);border-color:rgba(94,207,191,.3);}
-    .nav-mobile a svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.8;fill:none;}
+    .nav-mobile a svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round;}
     .nav-mobile-cta{padding:7px 14px;border-radius:9px;background:linear-gradient(135deg,rgba(94,207,191,.17),rgba(139,156,248,.13));border:1px solid rgba(94,207,191,.24)!important;color:var(--teal)!important;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;white-space:nowrap;display:flex!important;align-items:center!important;width:auto!important;height:auto!important;}
 
     /* HERO */
-    .hero{position:relative;min-height:140vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:hidden;padding:140px 24px 120px;}
-    .hero-bg{position:absolute;inset:-3%;z-index:0;background-image:url('photos/A641E538-FA54-463B-B71E-B8BE18D16DA7.jpeg');background-size:cover;background-position:center 28%;}
-    .hero-bg-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(14,17,24,.22) 0%,rgba(14,17,24,.38) 45%,rgba(14,17,24,.88) 100%);}
-    #p-canvas{position:absolute;inset:0;z-index:2;pointer-events:none;}
+    .hero{position:relative;min-height:140vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:visible;padding:140px 24px 120px;z-index:1;}
+    .hero-bg{position:absolute;inset:0;bottom:-160px;z-index:0;background-image:url('photos/A641E538-FA54-463B-B71E-B8BE18D16DA7.jpeg');background-size:cover;background-position:center 35%;}
+    .hero-bg-overlay{position:absolute;inset:0;bottom:-160px;z-index:1;background:linear-gradient(to bottom,rgba(14,17,24,.18) 0%,rgba(14,17,24,.30) 50%,rgba(14,17,24,.96) 100%);}
+    #p-canvas{display:none;}
     .hero-content{position:relative;z-index:3;max-width:900px;}
     .hero-label{display:inline-flex;align-items:center;gap:10px;padding:6px 18px;border-radius:100px;background:rgba(94,207,191,.12);border:1px solid rgba(94,207,191,.28);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);margin-bottom:32px;opacity:0;animation:fadeUp .7s .2s ease forwards;}
     .pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2.2s ease-in-out infinite;}
@@ -139,7 +139,13 @@
     /* GALLERY */
     #gallery{background:var(--bg2);position:relative;overflow:hidden;}
     .gbg{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
-    .gbg-item{position:absolute;border-radius:10px;overflow:hidden;opacity:.055;filter:blur(3px) saturate(.4);}
+    .gbg-item{
+      position:absolute;border-radius:16px;overflow:hidden;
+      opacity:.32;
+      filter:saturate(.6) brightness(.68);
+      /* glow that bleeds out */
+      box-shadow:0 0 60px 20px rgba(94,207,191,.12), 0 0 120px 40px rgba(139,156,248,.08);
+    }
     .gbg-item img{width:100%;height:100%;object-fit:cover;display:block;}
     .gallery-wrap{padding:72px 52px 96px;max-width:1360px;margin:0 auto;position:relative;z-index:1;}
     .gallery-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:44px;flex-wrap:wrap;gap:20px;}
@@ -161,7 +167,7 @@
     .photo-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;z-index:3;border-radius:20px 20px 0 0;background:linear-gradient(90deg,transparent,rgba(210,225,255,.5) 35%,rgba(94,207,191,.6) 60%,transparent);opacity:0;transition:opacity .3s;}
     .photo-card:hover::before{opacity:1;}
     .photo-card:hover{box-shadow:0 22px 60px rgba(0,0,0,.55),0 0 0 1px rgba(94,207,191,.26),inset 0 1px 0 rgba(210,225,255,.14);border-color:rgba(94,207,191,.2);}
-    .photo-card img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.84) saturate(.9);}
+    .photo-card img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.92) saturate(.95);}
 
     /* METAL SHEEN overlay */
     .card-sheen{
@@ -258,7 +264,7 @@
     .about-frame{border-radius:24px;overflow:hidden;aspect-ratio:3/4;border:1px solid var(--border);box-shadow:0 20px 70px rgba(0,0,0,.5),inset 0 1px 0 rgba(210,225,255,.07);position:relative;transition:transform .4s ease,box-shadow .4s ease;}
     .about-frame:hover{transform:scale(1.013) rotate(-.25deg);box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 0 1px rgba(94,207,191,.18),inset 0 1px 0 rgba(210,225,255,.10);}
     .about-frame::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;z-index:2;background:linear-gradient(90deg,transparent,rgba(94,207,191,.48),rgba(139,156,248,.36),transparent);}
-    .about-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(.85) contrast(1.02);display:block;}
+    .about-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(.92) contrast(1.02);display:block;}
     .about-badge{position:absolute;bottom:-16px;right:-16px;z-index:3;border-radius:18px;padding:16px 20px;background:rgba(14,17,24,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--border);box-shadow:0 8px 28px rgba(0,0,0,.42);transition:transform .28s ease;}
     .about-wrap:hover .about-badge{transform:translateY(-4px);}
     .about-badge-num{font-family:'Cormorant Upright',serif;font-size:32px;color:var(--teal);line-height:1;}
@@ -371,6 +377,99 @@
     @media(prefers-reduced-motion:reduce){
       *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
     }
+
+    /* ── AMBIENT ANIMATIONS ── */
+
+    /* Section tags float in softly */
+    .section-tag {
+      animation: tagDrift 6s ease-in-out infinite;
+    }
+    @keyframes tagDrift {
+      0%,100% { letter-spacing:.28em; }
+      50%      { letter-spacing:.32em; }
+    }
+
+    /* Separator line breathes */
+    .sec-sep-line {
+      animation: sepPulse 4s ease-in-out infinite;
+    }
+
+    /* Nav logo slow pulse glow */
+    .nav-logo {
+      animation: logoPulse 4s ease-in-out infinite;
+    }
+    @keyframes logoPulse {
+      0%,100% { opacity:1; }
+      50%      { opacity:0.7; }
+    }
+
+    /* Print card badge breathes */
+    .print-badge {
+      animation: badgeBreathe 4s ease-in-out infinite;
+    }
+    @keyframes badgeBreathe {
+      0%,100% { box-shadow: none; }
+      50%      { box-shadow: 0 0 10px rgba(94,207,191,.15); }
+    }
+
+    /* About badge number count-up shimmer */
+    .about-badge-num {
+      animation: numGlow 5s ease-in-out infinite;
+    }
+    @keyframes numGlow {
+      0%,100% { text-shadow: none; }
+      50%      { text-shadow: 0 0 16px rgba(94,207,191,.55); }
+    }
+
+    /* Gear icons pulse dot */
+    .gear-dot-pulse {
+      display:inline-block;
+      animation: gdPulse 2s ease-in-out infinite;
+    }
+    @keyframes gdPulse {
+      0%,100%{opacity:.5} 50%{opacity:1}
+    }
+
+    /* Hero scroll indicator extra glow */
+    .scroll-line {
+      box-shadow: 0 0 8px rgba(94,207,191,.4);
+    }
+
+    /* Contact card top border shimmer */
+    .ct-card::before {
+      animation: ctShimmer 5s ease-in-out infinite;
+    }
+    @keyframes ctShimmer {
+      0%,100%{opacity:.7;background-position:0% 0%}
+      50%    {opacity:1; background-position:100% 0%}
+    }
+
+    /* Filter buttons border animate on idle */
+    .gallery-filters {
+      animation: filterFloat 8s ease-in-out infinite;
+    }
+    @keyframes filterFloat {
+      0%,100%{transform:translateY(0)}
+      50%    {transform:translateY(-2px)}
+    }
+
+    /* Back-to-top glow pulse */
+    #back-top.visible {
+      animation: topGlow 3s ease-in-out infinite;
+    }
+    @keyframes topGlow {
+      0%,100%{box-shadow:0 4px 20px rgba(0,0,0,.4)}
+      50%    {box-shadow:0 4px 24px rgba(94,207,191,.22)}
+    }
+
+    /* Photo card subtle border glow on load */
+    .photo-card {
+      animation: cardLoad .6s ease both;
+    }
+    @keyframes cardLoad {
+      from{opacity:0;transform:translateY(10px)}
+      to  {opacity:1;transform:translateY(0)}
+    }
   </style>
 </head>
 <body>
@@ -406,9 +505,8 @@
   <div class="hero" id="hero">
     <div class="hero-bg"></div>
     <div class="hero-bg-overlay"></div>
-    <canvas id="p-canvas"></canvas>
     <div class="hero-content">
-      <div class="hero-label"><span class="pulse-dot"></span>Мобилография · Авто · Виды</div>
+      <div class="hero-label"><span class="pulse-dot"></span>Мобилография · Фотография · Видеография</div>
       <h1 class="hero-title" id="heroTitle" aria-label="Каждый кадр — отдельный мир"></h1>
       <p class="hero-sub">Снимаю на iPhone, Canon и Nikon. Нахожу атмосферу там, где другие проходят мимо.</p>
       <div class="hero-cta">
@@ -424,10 +522,10 @@
   <!-- GALLERY -->
   <div id="gallery">
     <div class="gbg">
-      <div class="gbg-item" style="width:170px;height:230px;top:7%;left:1.5%;transform:rotate(-6deg)"><img src="photos/IMG_6404.jpeg" alt=""/></div>
+      <div class="gbg-item" style="width:170px;height:230px;top:7%;left:1.5%;transform:rotate(-6deg)"><img src="photos/IMG_7773.jpg" alt=""/></div>
       <div class="gbg-item" style="width:130px;height:180px;top:54%;left:4%;transform:rotate(4deg)"><img src="photos/B6C58704-B323-4C3D-8084-9B9BA23D3861.jpeg" alt=""/></div>
-      <div class="gbg-item" style="width:155px;height:210px;top:14%;right:2%;transform:rotate(5deg)"><img src="photos/53EB39AD-E1ED-47CE-9E6D-740008704F70.jpeg" alt=""/></div>
-      <div class="gbg-item" style="width:110px;height:155px;top:64%;right:3.5%;transform:rotate(-4deg)"><img src="photos/IMG_5964.jpeg" alt=""/></div>
+      <div class="gbg-item" style="width:155px;height:210px;top:14%;right:2%;transform:rotate(5deg)"><img src="photos/IMG_7774.jpg" alt=""/></div>
+      <div class="gbg-item" style="width:110px;height:155px;top:64%;right:3.5%;transform:rotate(-4deg)"><img src="photos/IMG_7232.jpg" alt=""/></div>
     </div>
     <div class="gallery-wrap">
       <div class="gallery-top">
@@ -481,10 +579,11 @@
   <div id="prints">
     <div class="p-bg">
       <div class="p-bg-strip">
-        <img src="photos/IMG_7307.jpg" alt=""/>
-        <img src="photos/A641E538-FA54-463B-B71E-B8BE18D16DA7.jpeg" alt=""/>
         <img src="photos/IMG_7773.jpg" alt=""/>
-        <img src="photos/71E1339D-8955-4C5B-921B-F4C463FD12E0.jpeg" alt=""/>
+        <img src="photos/IMG_7723.jpg" alt=""/>
+        <img src="photos/IMG_7774.jpg" alt=""/>
+        <img src="photos/IMG_7307.jpg" alt=""/>
+        <img src="photos/IMG_7252.jpg" alt=""/>
       </div>
       <div class="p-bg-fade"></div>
     </div>
@@ -498,7 +597,7 @@
           <div class="print-material">Глянцевая бумага</div>
           <div class="print-divider"></div>
           <ul class="print-features">
-            <li>Качественная печать</li>
+            <li>Современная и качественная печать</li>
             <li>Подпись автора</li>
             <li>Упаковка в конверт</li>
             <li>Быстрая доставка</li>
@@ -512,7 +611,7 @@
           <div class="print-material">Глянцевая / Матовая</div>
           <div class="print-divider"></div>
           <ul class="print-features">
-            <li>Архивное качество печати</li>
+            <li>Лучшее архивное качество печати</li>
             <li>Подпись автора</li>
             <li>Сертификат подлинности</li>
             <li>Упаковка в конверт</li>
@@ -558,6 +657,21 @@
   <div id="about">
     <div class="about-bg-img"></div>
     <div class="about-bg-ov"></div>
+    <!-- scattered bg photos: moon + butterfly -->
+    <div style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;">
+      <div style="position:absolute;width:200px;height:270px;top:8%;left:3%;transform:rotate(-8deg);border-radius:18px;overflow:hidden;opacity:.28;filter:saturate(.6) brightness(.65);box-shadow:0 0 70px 25px rgba(139,156,248,.15),0 0 140px 50px rgba(94,207,191,.08);">
+        <img src="photos/IMG_7307.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+      </div>
+      <div style="position:absolute;width:160px;height:215px;bottom:10%;left:6%;transform:rotate(5deg);border-radius:18px;overflow:hidden;opacity:.24;filter:saturate(.55) brightness(.6);box-shadow:0 0 60px 20px rgba(201,123,142,.12),0 0 120px 40px rgba(139,156,248,.07);">
+        <img src="photos/IMG_7303.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+      </div>
+      <div style="position:absolute;width:190px;height:255px;top:12%;right:2%;transform:rotate(6deg);border-radius:18px;overflow:hidden;opacity:.26;filter:saturate(.6) brightness(.65);box-shadow:0 0 65px 22px rgba(139,156,248,.14),0 0 130px 45px rgba(94,207,191,.07);">
+        <img src="photos/IMG_7307.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+      </div>
+      <div style="position:absolute;width:140px;height:190px;bottom:8%;right:5%;transform:rotate(-5deg);border-radius:18px;overflow:hidden;opacity:.22;filter:saturate(.55) brightness(.6);box-shadow:0 0 55px 18px rgba(94,207,191,.10),0 0 110px 35px rgba(201,123,142,.06);">
+        <img src="photos/IMG_7303.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+      </div>
+    </div>
     <div class="section">
       <div class="about-grid">
         <div class="about-wrap reveal" style="position:relative">
@@ -613,7 +727,7 @@
           </div>
         </div>
         <div class="ct-btns">
-          <a href="mailto:vasily.rabochaya2022@gmail.com" class="btn-contact btn-email">
+          <a href="https://mail.google.com/mail/?view=cm&to=vasily.rabochaya2022@gmail.com" target="_blank" rel="noopener" class="btn-contact btn-email">
             <svg viewBox="0 0 16 16"><rect x="1" y="3" width="14" height="10" rx="1.5"/><polyline points="1,3 8,9 15,3"/></svg>
             Написать на почту
           </a>
@@ -629,7 +743,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="ft-logo">vasily<span>frames</span></div>
-    <p>© 2024 vasilyframes</p>
+    <p>© 2022 vasilyframes</p>
     <div class="ft-links">
       <a href="https://www.instagram.com/vasilyframeslife?igsh=MTVodzZmMzAxbzEwZw%3D%3D&utm_source=qr" target="_blank" rel="noopener">Instagram</a>
       <a href="https://t.me/vasilyframeslife" target="_blank" rel="noopener">Telegram</a>
@@ -676,30 +790,7 @@
     });
   })();
 
-  /* PARTICLES */
-  (function(){
-    const c=document.getElementById('p-canvas');if(!c)return;
-    const ctx=c.getContext('2d');let W,H;
-    function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}
-    resize();new ResizeObserver(resize).observe(c);
-    const pts=Array.from({length:50},()=>({x:Math.random()*1600,y:Math.random()*900,vx:(Math.random()-.5)*.2,vy:-Math.random()*.28-.07,r:Math.random()*1.3+.3,o:Math.random()*.48+.12,col:Math.random()>.5?'94,207,191':'139,156,248'}));
-    let af;
-    function draw(){
-      ctx.clearRect(0,0,W,H);
-      pts.forEach(p=>{
-        p.x+=p.vx;p.y+=p.vy;
-        if(p.y<-8){p.y=H+8;p.x=Math.random()*W;}
-        if(p.x<0)p.x=W;if(p.x>W)p.x=0;
-        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle=`rgba(${p.col},${p.o})`;ctx.fill();
-        ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x+p.vx*10,p.y+p.vy*10);
-        ctx.strokeStyle=`rgba(${p.col},${p.o*.35})`;ctx.lineWidth=p.r*.55;ctx.stroke();
-      });
-      af=requestAnimationFrame(draw);
-    }
-    draw();
-    new IntersectionObserver(([e])=>{e.isIntersecting?draw():cancelAnimationFrame(af);},{threshold:0}).observe(c);
-  })();
+  /* particles removed */
 
   /* MAGNETIC CARDS */
   if(isDesktop){
