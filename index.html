@@ -191,23 +191,21 @@
     .p-bg-strip img{height:100%;flex:1;object-fit:cover;}
     .p-bg-fade{position:absolute;inset:0;background:linear-gradient(to bottom,var(--bg) 0%,rgba(14,17,24,.3) 52%,var(--bg) 100%);}
     .prints-section{padding:clamp(60px,6rem,120px) clamp(24px,4vw,80px);max-width:min(1500px,96vw);margin:0 auto;position:relative;z-index:1;}
-    .prints-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,.9rem,18px);align-items:start;}
+    .prints-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,.9rem,18px);align-items:stretch;}
 
-    .print-card{border-radius:clamp(16px,1.4rem,26px);padding:clamp(20px,1.8rem,36px) clamp(16px,1.5rem,30px) clamp(16px,1.5rem,28px);background:var(--frost);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);border:1px solid var(--border);box-shadow:0 6px 30px rgba(0,0,0,.36),inset 0 1px 0 rgba(210,225,255,.08);position:relative;overflow:hidden;transition:transform .38s cubic-bezier(.34,1.26,.64,1),box-shadow .32s ease,border-color .28s;display:flex;flex-direction:column;}
+    .print-card{border-radius:clamp(16px,1.4rem,26px);padding:clamp(20px,1.8rem,36px) clamp(16px,1.5rem,30px) clamp(16px,1.5rem,28px);background:var(--frost);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);border:1px solid var(--border);box-shadow:0 6px 30px rgba(0,0,0,.36),inset 0 1px 0 rgba(210,225,255,.08);position:relative;overflow:hidden;transition:transform .38s cubic-bezier(.34,1.26,.64,1),box-shadow .32s ease,border-color .28s;display:flex;flex-direction:column;height:100%;}
     .print-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:inherit;background:linear-gradient(90deg,transparent,var(--ca,rgba(94,207,191,.48)),var(--cb,rgba(139,156,248,.36)),transparent);opacity:.65;transition:opacity .28s;}
     .print-card::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(135deg,rgba(210,225,255,.04) 0%,transparent 58%);}
     .print-card:hover{transform:translateY(-7px) scale(1.012);border-color:rgba(94,207,191,.2);box-shadow:0 24px 56px rgba(0,0,0,.48),0 0 0 1px rgba(94,207,191,.15),inset 0 1px 0 rgba(210,225,255,.10);}
     .print-card:hover::before{opacity:1;}
     .print-card:nth-child(1){--ca:rgba(139,156,248,.48);--cb:rgba(201,123,142,.30);}
-    .print-card:nth-child(2){--ca:rgba(94,207,191,.52);--cb:rgba(139,156,248,.32);}
-    .print-card:nth-child(3){--ca:rgba(139,156,248,.52);--cb:rgba(201,123,142,.32);}
+    .print-card:nth-child(2){--ca:rgba(210,160,40,.52);--cb:rgba(230,180,60,.32);}
     .print-card:nth-child(4){--ca:rgba(201,123,142,.42);--cb:rgba(94,207,191,.38);}
 
     .print-badge{display:inline-block;padding:clamp(2px,.2rem,5px) clamp(8px,.75rem,14px);border-radius:100px;font-size:clamp(8px,.68rem,12px);letter-spacing:.15em;text-transform:uppercase;margin-bottom:clamp(12px,1.1rem,22px);align-self:flex-start;transition:transform .22s;}
     .print-card:hover .print-badge{transform:translateY(-1px);}
     .print-card:nth-child(1) .print-badge{background:rgba(139,156,248,.11);border:1px solid rgba(139,156,248,.22);color:var(--indigo);}
-    .print-card:nth-child(2) .print-badge{background:rgba(94,207,191,.11);border:1px solid rgba(94,207,191,.22);color:var(--teal);}
-    .print-card:nth-child(3) .print-badge{background:rgba(139,156,248,.11);border:1px solid rgba(139,156,248,.25);color:var(--indigo);}
+    .print-card:nth-child(2) .print-badge{background:rgba(210,160,40,.11);border:1px solid rgba(210,160,40,.28);color:#d2a028;}
     .print-card:nth-child(4) .print-badge{background:rgba(201,123,142,.11);border:1px solid rgba(201,123,142,.25);color:var(--rose);}
     .print-size{font-family:'Cormorant Upright',serif;font-weight:300;font-size:clamp(28px,2.8rem,56px);line-height:1;color:var(--ice);margin-bottom:clamp(3px,.3rem,6px);transition:letter-spacing .28s;}
     .print-card:hover .print-size{letter-spacing:.03em;}
@@ -221,10 +219,9 @@
     .print-card:hover .print-features li:nth-child(4){transition-delay:.12s;transform:translateX(2px);}
     .print-features li::before{content:'';width:clamp(3px,.28rem,5px);height:clamp(3px,.28rem,5px);border-radius:50%;flex-shrink:0;}
     .print-card:nth-child(1) .print-features li::before{background:linear-gradient(135deg,var(--indigo),var(--rose));}
-    .print-card:nth-child(2) .print-features li::before{background:linear-gradient(135deg,var(--teal),var(--indigo));}
-    .print-card:nth-child(3) .print-features li::before{background:linear-gradient(135deg,var(--indigo),var(--rose));}
+    .print-card:nth-child(2) .print-features li::before{background:linear-gradient(135deg,#d2a028,#e8c050);}
     .print-card:nth-child(4) .print-features li::before{background:linear-gradient(135deg,var(--rose),var(--teal));}
-    .print-price{font-family:'Cormorant Upright',serif;font-weight:300;font-size:clamp(22px,2rem,40px);color:var(--ice);margin-top:clamp(12px,1.1rem,22px);margin-bottom:clamp(10px,.95rem,18px);}
+    .print-price{font-family:'Cormorant Upright',serif;font-weight:300;font-size:clamp(22px,2rem,40px);color:var(--ice);margin-top:auto;padding-top:clamp(12px,1.1rem,22px);margin-bottom:clamp(10px,.95rem,18px);}
     .print-price span{font-size:clamp(10px,.85rem,15px);color:var(--muted);}
     .btn-print{display:block;width:100%;text-align:center;padding:clamp(10px,.9rem,16px);border-radius:100px;font-size:clamp(9px,.75rem,13px);letter-spacing:.17em;text-transform:uppercase;cursor:none;text-decoration:none;font-family:'Inter',sans-serif;transition:all .26s;position:relative;z-index:1;overflow:hidden;}
     .btn-print::after{content:'';position:absolute;inset:0;border-radius:100px;opacity:0;transition:opacity .26s;}
@@ -233,12 +230,15 @@
     .print-card:nth-child(1) .btn-print{border:1px solid rgba(139,156,248,.28);color:var(--indigo);background:rgba(139,156,248,.07);}
     .print-card:nth-child(1) .btn-print::after{background:rgba(139,156,248,.10);}
     .print-card:nth-child(1) .btn-print:hover{box-shadow:0 5px 22px rgba(139,156,248,.18);border-color:rgba(139,156,248,.46);}
-    .print-card:nth-child(2) .btn-print{border:1px solid rgba(94,207,191,.28);color:var(--teal);background:rgba(94,207,191,.07);}
-    .print-card:nth-child(2) .btn-print::after{background:rgba(94,207,191,.10);}
-    .print-card:nth-child(2) .btn-print:hover{box-shadow:0 5px 22px rgba(94,207,191,.18);border-color:rgba(94,207,191,.46);}
-    .print-card:nth-child(3) .btn-print{border:1px solid rgba(139,156,248,.28);color:var(--indigo);background:rgba(139,156,248,.07);}
-    .print-card:nth-child(3) .btn-print::after{background:rgba(139,156,248,.10);}
-    .print-card:nth-child(3) .btn-print:hover{box-shadow:0 5px 22px rgba(139,156,248,.18);border-color:rgba(139,156,248,.46);}
+    .print-card:nth-child(2) .btn-print{border:1px solid rgba(210,160,40,.30);color:#d2a028;background:rgba(210,160,40,.08);}
+    .print-card:nth-child(2) .btn-print::after{background:rgba(210,160,40,.12);}
+    .print-card:nth-child(2) .btn-print:hover{box-shadow:0 5px 22px rgba(210,160,40,.22);border-color:rgba(210,160,40,.55);}
+    .print-card:nth-child(3){--ca:rgba(0,210,180,.52);--cb:rgba(0,180,200,.32);}
+    .print-card:nth-child(3) .print-badge{background:rgba(0,210,180,.11);border:1px solid rgba(0,210,180,.25);color:#00d2b4;}
+    .print-card:nth-child(3) .print-features li::before{background:linear-gradient(135deg,#00d2b4,#00b8c8);}
+    .print-card:nth-child(3) .btn-print{border:1px solid rgba(0,210,180,.28);color:#00d2b4;background:rgba(0,210,180,.07);}
+    .print-card:nth-child(3) .btn-print::after{background:rgba(0,210,180,.10);}
+    .print-card:nth-child(3) .btn-print:hover{box-shadow:0 5px 22px rgba(0,210,180,.22);border-color:rgba(0,210,180,.5);}
     .print-card:nth-child(4) .btn-print{border:1px solid rgba(201,123,142,.28);color:var(--rose);background:rgba(201,123,142,.07);}
     .print-card:nth-child(4) .btn-print::after{background:rgba(201,123,142,.10);}
     .print-card:nth-child(4) .btn-print:hover{box-shadow:0 5px 22px rgba(201,123,142,.18);border-color:rgba(201,123,142,.46);}
@@ -544,7 +544,7 @@
           <div class="print-material">Глянцевая / Матовая</div>
           <div class="print-divider"></div>
           <ul class="print-features">
-            <li>Архивное качество печати</li>
+            <li>Лучшее архивное качество печати</li>
             <li>Подпись автора</li>
             <li>Сертификат подлинности</li>
             <li>Упаковка в тубус</li>
@@ -553,15 +553,15 @@
           <a href="#contact" class="btn-print">Заказать</a>
         </div>
         <div class="print-card reveal">
-          <div class="print-badge">Fine Art</div>
+          <div class="print-badge">Эксклюзивный</div>
           <div class="print-size">60×90</div>
-          <div class="print-material">Hahnemühle · 308 г/м²</div>
+          <div class="print-material">Глянец / Мат / Металл</div>
           <div class="print-divider"></div>
           <ul class="print-features">
+            <li>Делаем на заказ, детали обговариваются</li>
             <li>Музейная бумага премиум</li>
             <li>Подпись и нумерация</li>
             <li>Сертификат подлинности</li>
-            <li>Лимитированный тираж</li>
           </ul>
           <div class="print-price">от 18 000 <span>₽</span></div>
           <a href="#contact" class="btn-print">Заказать</a>
@@ -637,7 +637,7 @@
             <svg viewBox="0 0 16 16"><rect x="1" y="3" width="14" height="10" rx="1.5"/><polyline points="1,3 8,9 15,3"/></svg>
             Написать на почту
           </a>
-          <a href="https://t.me/vasilyframeslife" target="_blank" rel="noopener" class="btn-contact btn-telegram">
+          <a href="https://t.me/vasilyframes" target="_blank" rel="noopener" class="btn-contact btn-telegram">
             <svg viewBox="0 0 16 16"><path d="M1 8l12-5.5-4.5 11.5-2.5-4.5L1 8z"/><path d="M6.5 9.5l2-2"/></svg>
             Написать в Telegram
           </a>
