@@ -1,0 +1,97 @@
+/*
+=============================================================
+  CURSOR.CSS — Кастомный курсор / Custom cursor
+  Заменяет стандартный курсор браузера на стилизованный:
+  — маленькая точка (следует за мышью точно)
+  — кольцо (следует с лёгкой задержкой)
+  — большое свечение (следует медленно, создаёт ореол)
+  
+  Replaces the browser cursor with a stylized version:
+  — small dot (follows mouse precisely)
+  — ring (follows with slight delay)
+  — large glow (follows slowly, creates halo effect)
+  
+  Работает только на устройствах с мышью (hover:hover).
+  Only works on devices with a mouse (hover:hover).
+=============================================================
+*/
+
+/* ── Показываем только на устройствах с мышью / Mouse devices only */
+@media (hover: hover) {
+
+  /* Маленькая точка — точное положение / Small dot — precise position */
+  #cur-dot {
+    position: fixed;
+    top: 0; left: 0;
+    width: clamp(6px,0.45rem,10px);
+    height: clamp(6px,0.45rem,10px);
+    border-radius: 50%;
+    background: var(--teal);
+    pointer-events: none;   /* не блокирует клики / doesn't block clicks */
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen; /* светлый режим наложения / light blend mode */
+    transition: width .18s, height .18s;
+  }
+
+  /* Кольцо — следует с задержкой / Ring — follows with delay */
+  #cur-ring {
+    position: fixed;
+    top: 0; left: 0;
+    width: clamp(28px,2.2rem,44px);
+    height: clamp(28px,2.2rem,44px);
+    border-radius: 50%;
+    border: 1px solid rgba(94,207,191,.34);
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    /* Задержка движения через transition / Movement delay via transition */
+    transition: width .22s, height .22s, border-color .22s, left .13s ease, top .13s ease;
+  }
+
+  /* Большое свечение — медленно плывёт / Large glow — drifts slowly */
+  #cur-glow {
+    position: fixed;
+    top: 0; left: 0;
+    width: clamp(200px,18vw,380px);
+    height: clamp(200px,18vw,380px);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9990;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle,
+      rgba(94,207,191,.05)  0%,
+      rgba(139,156,248,.024) 40%,
+      transparent 70%
+    );
+    /* Очень медленно следует за мышью / Very slowly follows mouse */
+    transition:
+      left .58s cubic-bezier(.25,.46,.45,.94),
+      top  .58s cubic-bezier(.25,.46,.45,.94);
+    mix-blend-mode: screen;
+  }
+
+  /* ── При наведении на кликабельные элементы / On hover over clickable elements ──
+     Курсор расширяется и меняет цвет — сигнал что можно кликнуть.
+     Cursor expands and changes color — signals clickable element.
+  */
+  body.c-hover #cur-ring {
+    width: clamp(40px,3rem,56px);
+    height: clamp(40px,3rem,56px);
+    border-color: rgba(94,207,191,.68);
+  }
+  body.c-hover #cur-dot {
+    width: clamp(4px,0.32rem,7px);
+    height: clamp(4px,0.32rem,7px);
+    background: #fff;
+  }
+
+  /* ── В лайтбоксе курсор снова видимый / In lightbox cursor is visible ──
+     Скрываем кастомный курсор внутри лайтбокса.
+     Hide custom cursor inside lightbox.
+  */
+  .lightbox.open {
+    cursor: auto;
+  }
+}

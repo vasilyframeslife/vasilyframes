@@ -1,0 +1,243 @@
+/*
+=============================================================
+  NAV.CSS — Шапка / Navigation
+  Фиксированная навигационная панель сверху страницы.
+  Имеет эффект стекла (glassmorphism) — размытый фон.
+  
+  Fixed navigation bar at the top of the page.
+  Has glass effect (glassmorphism) — blurred background.
+=============================================================
+*/
+
+/* ── ОСНОВНАЯ ПАНЕЛЬ НАВИГАЦИИ / MAIN NAV BAR ───────────────
+   Плавает над всем контентом (position:fixed).
+   Адаптируется по ширине под 4K и мобильные.
+   
+   Floats above all content (position:fixed).
+   Adapts width for 4K and mobile.
+──────────────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: clamp(10px,1.2vw,20px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  width: calc(100% - clamp(24px,3vw,60px));
+  max-width: min(1400px, 95vw);
+  border-radius: clamp(12px,1.2rem,20px);
+  height: clamp(48px,4rem,70px);
+  padding: 0 clamp(6px,.6rem,12px) 0 clamp(16px,1.6rem,28px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* Стеклянный эффект / Glass effect */
+  background: rgba(14,17,24,.62);
+  backdrop-filter: blur(36px) saturate(160%);
+  -webkit-backdrop-filter: blur(36px) saturate(160%);
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 32px rgba(0,0,0,.36), inset 0 1px 0 rgba(210,225,255,.08);
+  transition: box-shadow .3s;
+}
+
+/* Усиление тени при наведении / Enhanced shadow on hover */
+nav:hover {
+  box-shadow:
+    0 10px 44px rgba(0,0,0,.46),
+    inset 0 1px 0 rgba(210,225,255,.11),
+    0 0 0 1px rgba(94,207,191,.07);
+}
+
+/* ── ЛОГОТИП / LOGO ──────────────────────────────────────────
+   «vasily» белым, «frames» — тилом.
+   «vasily» in white, «frames» — teal.
+──────────────────────────────────────────────────────────── */
+.nav-logo {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(11px,1.1rem,18px);
+  letter-spacing: .09em;
+  color: var(--ice);
+  text-decoration: none;
+  transition: color .28s;
+  flex-shrink: 0;
+  /* Медленное мигание логотипа / Slow logo pulse — defined in animations.css */
+}
+.nav-logo span { color: var(--teal); }
+.nav-logo:hover { color: var(--teal); }
+
+/* ── ДЕСКТОПНЫЕ ССЫЛКИ / DESKTOP LINKS ──────────────────────
+   Горизонтальный список ссылок. Скрывается на мобиле.
+   Horizontal list of links. Hidden on mobile.
+──────────────────────────────────────────────────────────── */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(2px,.2rem,4px);
+  list-style: none;
+}
+
+.nav-links li a {
+  display: block;
+  padding: clamp(6px,.55rem,10px) clamp(10px,1rem,18px);
+  border-radius: clamp(8px,.8rem,14px);
+  color: var(--muted);
+  text-decoration: none;
+  font-size: clamp(9px,.75rem,13px);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  transition: color .22s, background .22s;
+  position: relative;
+}
+
+/* Подчёркивание при наведении / Underline on hover */
+.nav-links li a::after {
+  content: '';
+  position: absolute;
+  bottom: clamp(3px,.3rem,6px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background: var(--teal);
+  transition: width .25s;
+}
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: var(--teal);
+  background: rgba(94,207,191,.07);
+}
+.nav-links li a.active::after,
+.nav-links li a:hover::after { width: 44%; }
+
+/* ── КНОПКА «ЗАКАЗАТЬ» / ORDER BUTTON ───────────────────────
+   Выделенная кнопка с градиентным фоном.
+   Highlighted button with gradient background.
+──────────────────────────────────────────────────────────── */
+.nav-cta {
+  margin-left: clamp(4px,.5rem,10px);
+  padding: clamp(6px,.6rem,10px) clamp(12px,1.2rem,22px);
+  border-radius: clamp(8px,.8rem,14px);
+  background: linear-gradient(135deg, rgba(94,207,191,.17), rgba(139,156,248,.14));
+  border: 1px solid rgba(94,207,191,.24);
+  color: var(--teal) !important;
+  font-size: clamp(9px,.75rem,13px) !important;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all .25s !important;
+  white-space: nowrap;
+}
+.nav-cta:hover {
+  background: linear-gradient(135deg, rgba(94,207,191,.28), rgba(139,156,248,.22)) !important;
+  box-shadow: 0 0 18px rgba(94,207,191,.2);
+}
+.nav-cta.active {
+  background: linear-gradient(135deg, rgba(94,207,191,.28), rgba(139,156,248,.22)) !important;
+}
+.nav-cta::after { display: none !important; }
+
+/* ── МОБИЛЬНАЯ НАВИГАЦИЯ / MOBILE NAVIGATION ────────────────
+   Иконки вместо текста на маленьких экранах.
+   Icons instead of text on small screens.
+──────────────────────────────────────────────────────────── */
+.nav-mobile {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Каждая иконка — квадратная кнопка / Each icon — square button */
+.nav-mobile a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--frost);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .22s, background .22s, border-color .22s;
+}
+.nav-mobile a:hover,
+.nav-mobile a.active {
+  color: var(--teal);
+  background: var(--teal-d);
+  border-color: rgba(94,207,191,.3);
+}
+.nav-mobile a svg {
+  width: 16px; height: 16px;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Кнопка «Связь» на мобиле / «Contact» button on mobile */
+.nav-mobile-cta {
+  padding: 7px 14px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, rgba(94,207,191,.17), rgba(139,156,248,.13));
+  border: 1px solid rgba(94,207,191,.24) !important;
+  color: var(--teal) !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  display: flex !important;
+  align-items: center !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* ── КНОПКА «НАВЕРХ» / BACK TO TOP ──────────────────────────
+   Появляется в левом нижнем углу при скролле вниз.
+   Appears in bottom-left corner when scrolling down.
+──────────────────────────────────────────────────────────── */
+#back-top {
+  position: fixed;
+  bottom: clamp(20px,2vw,36px);
+  left: clamp(16px,1.8vw,32px);
+  z-index: 400;
+  width: clamp(36px,2.8rem,56px);
+  height: clamp(36px,2.8rem,56px);
+  border-radius: 50%;
+  background: rgba(14,17,24,.80);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,.4);
+  /* Скрыта по умолчанию, появляется через JS / Hidden by default, shown via JS */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .35s, transform .35s, border-color .25s, box-shadow .25s;
+  pointer-events: none;
+}
+#back-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+#back-top:hover {
+  border-color: rgba(94,207,191,.5);
+  box-shadow: 0 6px 28px rgba(94,207,191,.24);
+}
+#back-top svg {
+  width: clamp(12px,1rem,20px);
+  height: clamp(12px,1rem,20px);
+  stroke: var(--teal);
+  stroke-width: 2.2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

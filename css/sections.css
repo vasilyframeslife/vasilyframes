@@ -1,0 +1,1150 @@
+/*
+=============================================================
+  SECTIONS.CSS — Секции страницы / Page sections
+  Стили для всех основных блоков сайта:
+  Hero, Gallery, Prints, About, Contact, Footer.
+  
+  Styles for all main blocks of the site:
+  Hero, Gallery, Prints, About, Contact, Footer.
+=============================================================
+*/
+
+/* ════════════════════════════════════════════════════════════
+   ОБЩИЕ СТИЛИ СЕКЦИЙ / COMMON SECTION STYLES
+════════════════════════════════════════════════════════════ */
+
+/* Контейнер секции — центрирует контент и ограничивает ширину
+   Section container — centers content and limits width */
+.section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(60px,6rem,120px) clamp(24px,4vw,80px);
+  max-width: min(1500px, 96vw);
+  margin: 0 auto;
+}
+
+/* Маленький тег над заголовком / Small tag above heading */
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(8px,.7rem,14px);
+  font-size: clamp(8px,.65rem,11px);
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: clamp(12px,1rem,20px);
+}
+.section-tag::before {
+  content: '';
+  width: clamp(14px,1.2rem,24px);
+  height: 1px;
+  background: var(--teal);
+}
+
+/* Главный заголовок секции / Main section heading */
+.section-title {
+  font-family: 'Cormorant Upright', serif;
+  font-weight: 300;
+  font-size: clamp(26px,3.2rem,64px);
+  line-height: 1.1;
+  color: var(--ice);
+  margin-bottom: clamp(36px,3.5rem,70px);
+}
+
+/* ── РАЗДЕЛИТЕЛЬ СЕКЦИЙ / SECTION SEPARATOR ─────────────────
+   Тонкая светящаяся линия между блоками.
+   Создаёт плавный переход между секциями.
+   
+   Thin glowing line between blocks.
+   Creates smooth transition between sections.
+──────────────────────────────────────────────────────────── */
+.sec-sep {
+  position: relative;
+  z-index: 2;
+  height: clamp(48px,5vw,90px);
+  /* Градиент от цвета одной секции к другой / Gradient from one section color to another */
+  background: linear-gradient(to bottom, var(--sep-from, var(--bg)), var(--sep-to, var(--bg2)));
+}
+
+/* Светящаяся горизонтальная линия / Glowing horizontal line */
+.sec-sep-line {
+  position: absolute;
+  left: 8%; right: 8%;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--teal) 25%, var(--indigo) 75%, transparent);
+  box-shadow:
+    0 0 clamp(8px,1rem,18px) clamp(2px,.3rem,5px) rgba(94,207,191,.32),
+    0 0 clamp(3px,.3rem,6px) 1px rgba(139,156,248,.2);
+  animation: sepPulse 4s ease-in-out infinite; /* определено в animations.css / defined in animations.css */
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   ГЕРОЙ / HERO SECTION
+════════════════════════════════════════════════════════════ */
+
+/* Главный блок на всю высоту экрана / Full viewport height main block */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden; /* ВАЖНО: без этого фон вытекает / IMPORTANT: without this bg bleeds out */
+  padding: clamp(100px,10vw,160px) clamp(16px,2vw,40px) clamp(60px,6vw,100px);
+}
+
+/* Фоновое фото / Background photo */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('../photos/auto/auto2.jpg');
+  background-size: cover;
+  background-position: center 50%;
+}
+
+/* Тёмный градиент поверх фото — текст читабелен / Dark gradient over photo — text is readable */
+.hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(14,17,24,.20) 0%,
+    rgba(14,17,24,.35) 55%,
+    rgba(14,17,24,1)   100%
+  );
+}
+
+/* Контент поверх фото / Content above photo */
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: min(900px, 90vw);
+}
+
+/* Лейбл «Мобилография · Фотография · Видеография» */
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(8px,.7rem,14px);
+  padding: clamp(5px,.45rem,9px) clamp(14px,1.3rem,24px);
+  border-radius: 100px;
+  background: rgba(94,207,191,.22);
+  border: 1px solid rgba(94,207,191,.55);
+  box-shadow: 0 0 20px rgba(94,207,191,.18);
+  font-size: clamp(8px,.65rem,11px);
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: #7eeee0;
+  margin-bottom: clamp(24px,2.2rem,40px);
+  opacity: 0;
+  animation: fadeUp .7s .2s ease forwards;
+}
+
+/* Главный заголовок — каждая буква анимируется отдельно
+   Main heading — each letter animates separately */
+.hero-title {
+  font-family: 'Cormorant Upright', serif;
+  font-weight: 300;
+  font-size: clamp(40px,7vw,120px);
+  line-height: .94;
+  letter-spacing: -.01em;
+  color: #fff;
+  margin-bottom: clamp(18px,1.8rem,30px);
+  min-height: 1.9em;
+}
+/* Каждый символ заголовка / Each heading character */
+.hero-title .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(28px) scaleY(1.1);
+  filter: blur(6px);
+  animation: charIn .5s ease forwards;
+}
+.hero-title .sp  { display: inline-block; width: .26em; } /* пробел / space */
+.hero-title .br  { display: block; }                      /* перенос строки / line break */
+.hero-title .ac  {                                         /* акцентные слова / accent words */
+  font-style: italic;
+  background: linear-gradient(128deg, var(--teal) 0%, var(--indigo) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Подзаголовок курсивом / Italic subheading */
+.hero-sub {
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  font-size: clamp(13px,1.2rem,22px);
+  color: rgba(232,238,255,.72);
+  max-width: min(440px, 85vw);
+  line-height: 1.85;
+  margin: 0 auto clamp(32px,3rem,52px);
+  opacity: 0;
+  animation: fadeUp .7s .95s ease forwards;
+}
+
+/* Кнопки в герое / Hero buttons */
+.hero-cta {
+  display: flex;
+  gap: clamp(8px,.8rem,16px);
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeUp .7s 1.1s ease forwards;
+}
+
+/* Статистика: 2+ года, 4 варианта, Доставка / Stats row */
+.hero-stats {
+  display: flex;
+  gap: clamp(28px,4vw,64px);
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: clamp(56px,7vw,100px);
+  opacity: 0;
+  animation: fadeUp .7s 1.3s ease forwards;
+  padding-bottom: clamp(16px,2vw,32px);
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: clamp(80px,8vw,130px);
+}
+/* Крупное число / Large number */
+.stat-num {
+  font-family: 'Cormorant Upright', serif;
+  font-weight: 300;
+  font-size: clamp(28px,3.2rem,56px);
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255,255,255,.25);
+}
+.stat-num span { color: var(--teal); }
+/* Подпись под числом / Label under number */
+.stat-label {
+  font-size: clamp(8px,.65rem,11px);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(210,225,255,.72);
+  text-align: center;
+  line-height: 1.5;
+}
+/* Вертикальный разделитель между статами / Vertical divider between stats */
+.stat-divider {
+  width: 1px;
+  height: clamp(40px,3.5rem,60px);
+  background: linear-gradient(to bottom, transparent, rgba(210,225,255,.25), transparent);
+  align-self: center;
+  margin-top: 4px;
+}
+
+/* Индикатор скролла / Scroll indicator */
+.hero-scroll {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: clamp(24px,3vw,44px);
+}
+.hero-scroll span {
+  font-size: clamp(8px,.65rem,11px);
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: rgba(210,225,255,.75);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   ГАЛЕРЕЯ / GALLERY SECTION
+════════════════════════════════════════════════════════════ */
+
+#gallery {
+  background: var(--bg2);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Декоративные фото на фоне галереи / Decorative photos in gallery background */
+.gbg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.gbg-item {
+  position: absolute;
+  border-radius: 16px;
+  overflow: hidden;
+  opacity: .32;
+  filter: saturate(.6) brightness(.68);
+  box-shadow:
+    0 0 60px 20px rgba(94,207,191,.12),
+    0 0 120px 40px rgba(139,156,248,.08);
+}
+.gbg-item img { width:100%; height:100%; object-fit:cover; display:block; }
+
+.gallery-wrap {
+  padding: clamp(48px,5rem,100px) clamp(24px,4vw,80px) clamp(60px,6rem,120px);
+  max-width: min(1500px, 96vw);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.gallery-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: clamp(28px,2.8rem,56px);
+  flex-wrap: wrap;
+  gap: clamp(14px,1.4rem,28px);
+}
+
+/* Кнопки фильтрации / Filter buttons */
+.gallery-filters {
+  display: flex;
+  gap: clamp(4px,.4rem,8px);
+  flex-wrap: wrap;
+}
+.filter-btn {
+  padding: clamp(5px,.5rem,9px) clamp(12px,1.1rem,20px);
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: none;
+  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(9px,.75rem,13px);
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: all .22s;
+  position: relative;
+  overflow: hidden;
+}
+.filter-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  background: linear-gradient(135deg, rgba(94,207,191,.11), rgba(139,156,248,.07));
+  opacity: 0;
+  transition: opacity .22s;
+}
+.filter-btn:hover::before,
+.filter-btn.active::before { opacity: 1; }
+.filter-btn.active,
+.filter-btn:hover {
+  border-color: rgba(94,207,191,.34);
+  color: var(--teal);
+}
+
+/* Сетка фотографий — 3 колонки / Photo grid — 3 columns */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(8px,.9rem,18px);
+}
+
+/* Обёртка карточки — соотношение сторон 3:4 / Card wrapper — 3:4 aspect ratio */
+.card-mag {
+  position: relative;
+  aspect-ratio: 3/4;
+}
+.card-mag.hidden-card { display: none; }
+
+/* Карточка фотографии / Photo card */
+.photo-card {
+  border-radius: clamp(14px,1.2rem,24px);
+  overflow: hidden;
+  position: relative;
+  cursor: none;
+  width: 100%;
+  height: 100%;
+  background: var(--frost);
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 28px rgba(0,0,0,.44), inset 0 1px 0 rgba(210,225,255,.07);
+  transition: box-shadow .35s ease, border-color .35s ease;
+}
+/* Световая полоска сверху при наведении / Light strip on top on hover */
+.photo-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  z-index: 3;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(210,225,255,.5) 35%, rgba(94,207,191,.6) 60%, transparent);
+  opacity: 0;
+  transition: opacity .3s;
+}
+.photo-card:hover::before { opacity: 1; }
+.photo-card:hover {
+  box-shadow:
+    0 22px 60px rgba(0,0,0,.56),
+    0 0 0 1px rgba(94,207,191,.26),
+    inset 0 1px 0 rgba(210,225,255,.12);
+  border-color: rgba(94,207,191,.2);
+}
+/* Фото заполняет всю карточку / Photo fills entire card */
+.photo-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(.92) saturate(.95);
+}
+/* Металлический блик при наведении / Metal sheen on hover */
+.card-sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,.18) 50%, transparent 80%);
+  background-size: 200% 100%;
+  background-position: 200% 0;
+  transition: background-position .55s ease, opacity .3s;
+  opacity: 0;
+}
+.photo-card:hover .card-sheen {
+  opacity: 1;
+  background-position: -20% 0;
+}
+/* Подпись снизу — выезжает при наведении / Caption slides up on hover */
+.pc-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 4;
+  padding: clamp(16px,1.5rem,28px) clamp(14px,1.3rem,24px) clamp(12px,1.1rem,20px);
+  background: linear-gradient(to top, rgba(14,17,24,.90) 0%, rgba(14,17,24,.45) 65%, transparent 100%);
+  transform: translateY(100%);
+  transition: transform .32s cubic-bezier(.34,1.18,.64,1);
+  border-radius: 0 0 inherit inherit;
+}
+.photo-card:hover .pc-info { transform: translateY(0); }
+.pc-label {
+  font-family: 'Cormorant Upright', serif;
+  font-size: clamp(16px,1.4rem,26px);
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: .02em;
+}
+.pc-sub {
+  font-size: clamp(10px,.85rem,14px);
+  color: rgba(210,225,255,.75);
+  letter-spacing: .08em;
+  margin-top: clamp(2px,.2rem,4px);
+}
+
+/* Кнопка «Ещё фотографии» / Show more button */
+.gallery-more-wrap { text-align: center; margin-top: clamp(20px,2rem,40px); }
+.btn-more {
+  padding: clamp(10px,.9rem,16px) clamp(22px,2rem,38px);
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--frost);
+  color: var(--subtle);
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(9px,.75rem,13px);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: all .26s;
+  display: inline-block;
+}
+.btn-more:hover {
+  border-color: rgba(94,207,191,.36);
+  color: var(--teal);
+  background: var(--teal-d);
+}
+.btn-more.hidden { display: none; }
+
+
+/* ════════════════════════════════════════════════════════════
+   ПРИНТЫ / PRINTS SECTION
+════════════════════════════════════════════════════════════ */
+
+#prints { position: relative; overflow: hidden; background: var(--bg); }
+
+/* Фоновая полоска из фото / Background photo strip */
+.p-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.p-bg-strip {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 48%;
+  display: flex;
+  gap: 2px;
+  opacity: .07;
+  filter: blur(5px) saturate(.38);
+}
+.p-bg-strip img { height: 100%; flex: 1; object-fit: cover; }
+.p-bg-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, var(--bg) 0%, rgba(14,17,24,.3) 52%, var(--bg) 100%);
+}
+
+.prints-section {
+  padding: clamp(60px,6rem,120px) clamp(24px,4vw,80px);
+  max-width: min(1500px, 96vw);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Сетка карточек принтов — 4 колонки / Print cards grid — 4 columns */
+.prints-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(8px,.9rem,18px);
+  align-items: stretch; /* все карточки одинаковой высоты / all cards same height */
+}
+
+/* Карточка принта — стеклянный эффект / Print card — glass effect */
+.print-card {
+  border-radius: clamp(16px,1.4rem,26px);
+  padding: clamp(20px,1.8rem,36px) clamp(16px,1.5rem,30px) clamp(16px,1.5rem,28px);
+  background: var(--frost);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 30px rgba(0,0,0,.36), inset 0 1px 0 rgba(210,225,255,.08);
+  position: relative;
+  overflow: hidden;
+  transition: transform .38s cubic-bezier(.34,1.26,.64,1), box-shadow .32s ease, border-color .28s;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* растягивается на всю высоту ячейки / stretches to full cell height */
+}
+/* Цветная полоска сверху / Colored stripe on top */
+.print-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, var(--ca, rgba(94,207,191,.48)), var(--cb, rgba(139,156,248,.36)), transparent);
+  opacity: .65;
+  transition: opacity .28s;
+}
+.print-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(210,225,255,.04) 0%, transparent 58%);
+}
+.print-card:hover {
+  transform: translateY(-7px) scale(1.012);
+  border-color: rgba(94,207,191,.2);
+  box-shadow:
+    0 24px 56px rgba(0,0,0,.48),
+    0 0 0 1px rgba(94,207,191,.15),
+    inset 0 1px 0 rgba(210,225,255,.10);
+}
+.print-card:hover::before { opacity: 1; }
+
+/* Цвета для каждой карточки / Colors for each card */
+.print-card:nth-child(1) { --ca: rgba(139,156,248,.48); --cb: rgba(201,123,142,.30); } /* индиго / indigo */
+.print-card:nth-child(2) { --ca: rgba(210,160,40,.52);  --cb: rgba(230,180,60,.32);  } /* янтарь / amber */
+.print-card:nth-child(3) { --ca: rgba(0,210,180,.52);   --cb: rgba(0,180,200,.32);   } /* аквамарин / aquamarine */
+.print-card:nth-child(4) { --ca: rgba(201,123,142,.42); --cb: rgba(94,207,191,.38);  } /* роза / rose */
+
+/* Бейдж с названием тарифа / Plan name badge */
+.print-badge {
+  display: inline-block;
+  padding: clamp(2px,.2rem,5px) clamp(8px,.75rem,14px);
+  border-radius: 100px;
+  font-size: clamp(8px,.68rem,12px);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  margin-bottom: clamp(12px,1.1rem,22px);
+  align-self: flex-start;
+  transition: transform .22s;
+}
+.print-card:hover .print-badge { transform: translateY(-1px); }
+
+/* Цвета бейджей / Badge colors */
+.print-card:nth-child(1) .print-badge { background: rgba(139,156,248,.11); border: 1px solid rgba(139,156,248,.22); color: var(--indigo); }
+.print-card:nth-child(2) .print-badge { background: rgba(210,160,40,.11);  border: 1px solid rgba(210,160,40,.28);  color: #d2a028; }
+.print-card:nth-child(3) .print-badge { background: rgba(0,210,180,.11);   border: 1px solid rgba(0,210,180,.25);   color: #00d2b4; }
+.print-card:nth-child(4) .print-badge { background: rgba(201,123,142,.11); border: 1px solid rgba(201,123,142,.25); color: var(--rose); }
+
+/* Размер принта / Print size */
+.print-size {
+  font-family: 'Cormorant Upright', serif;
+  font-weight: 300;
+  font-size: clamp(28px,2.8rem,56px);
+  line-height: 1;
+  color: var(--ice);
+  margin-bottom: clamp(3px,.3rem,6px);
+  transition: letter-spacing .28s;
+}
+.print-card:hover .print-size { letter-spacing: .03em; }
+
+.print-material {
+  font-size: clamp(9px,.78rem,14px);
+  color: var(--muted);
+  letter-spacing: .07em;
+  margin-bottom: clamp(14px,1.3rem,26px);
+}
+.print-divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: clamp(12px,1.1rem,22px);
+}
+
+/* Список характеристик / Features list */
+.print-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(7px,.7rem,13px);
+  flex: 1; /* занимает всё свободное место / takes all available space */
+}
+.print-features li {
+  font-size: clamp(10px,.82rem,14px);
+  color: var(--subtle);
+  display: flex;
+  align-items: center;
+  gap: clamp(7px,.7rem,13px);
+  transition: transform .18s;
+}
+/* Анимация пунктов при наведении / Feature items animate on hover */
+.print-card:hover .print-features li:nth-child(1) { transform: translateX(2px); }
+.print-card:hover .print-features li:nth-child(2) { transition-delay:.04s; transform: translateX(2px); }
+.print-card:hover .print-features li:nth-child(3) { transition-delay:.08s; transform: translateX(2px); }
+.print-card:hover .print-features li:nth-child(4) { transition-delay:.12s; transform: translateX(2px); }
+/* Цветные точки / Colored dots */
+.print-features li::before {
+  content: '';
+  width: clamp(3px,.28rem,5px);
+  height: clamp(3px,.28rem,5px);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.print-card:nth-child(1) .print-features li::before { background: linear-gradient(135deg, var(--indigo), var(--rose)); }
+.print-card:nth-child(2) .print-features li::before { background: linear-gradient(135deg, #d2a028, #e8c050); }
+.print-card:nth-child(3) .print-features li::before { background: linear-gradient(135deg, #00d2b4, #00b8c8); }
+.print-card:nth-child(4) .print-features li::before { background: linear-gradient(135deg, var(--rose), var(--teal)); }
+
+/* Цена — прибита к низу карточки / Price — pinned to bottom of card */
+.print-price {
+  font-family: 'Cormorant Upright', serif;
+  font-weight: 300;
+  font-size: clamp(22px,2rem,40px);
+  color: var(--ice);
+  margin-top: auto;          /* auto отталкивает к низу / auto pushes to bottom */
+  padding-top: clamp(12px,1.1rem,22px);
+  margin-bottom: clamp(10px,.95rem,18px);
+}
+.print-price span {
+  font-size: clamp(10px,.85rem,15px);
+  color: var(--muted);
+}
+
+/* Кнопка «Заказать» / Order button */
+.btn-print {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: clamp(10px,.9rem,16px);
+  border-radius: 100px;
+  font-size: clamp(9px,.75rem,13px);
+  letter-spacing: .17em;
+  text-transform: uppercase;
+  cursor: none;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  transition: all .26s;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.btn-print::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  opacity: 0;
+  transition: opacity .26s;
+}
+.btn-print:hover::after { opacity: 1; }
+.btn-print:hover { transform: translateY(-2px); }
+
+/* Цвета кнопок по карточкам / Button colors per card */
+.print-card:nth-child(1) .btn-print { border:1px solid rgba(139,156,248,.28); color:var(--indigo); background:rgba(139,156,248,.07); }
+.print-card:nth-child(1) .btn-print::after { background:rgba(139,156,248,.10); }
+.print-card:nth-child(1) .btn-print:hover { box-shadow:0 5px 22px rgba(139,156,248,.18); border-color:rgba(139,156,248,.46); }
+.print-card:nth-child(2) .btn-print { border:1px solid rgba(210,160,40,.30); color:#d2a028; background:rgba(210,160,40,.08); }
+.print-card:nth-child(2) .btn-print::after { background:rgba(210,160,40,.12); }
+.print-card:nth-child(2) .btn-print:hover { box-shadow:0 5px 22px rgba(210,160,40,.22); border-color:rgba(210,160,40,.55); }
+.print-card:nth-child(3) .btn-print { border:1px solid rgba(0,210,180,.28); color:#00d2b4; background:rgba(0,210,180,.07); }
+.print-card:nth-child(3) .btn-print::after { background:rgba(0,210,180,.10); }
+.print-card:nth-child(3) .btn-print:hover { box-shadow:0 5px 22px rgba(0,210,180,.22); border-color:rgba(0,210,180,.5); }
+.print-card:nth-child(4) .btn-print { border:1px solid rgba(201,123,142,.28); color:var(--rose); background:rgba(201,123,142,.07); }
+.print-card:nth-child(4) .btn-print::after { background:rgba(201,123,142,.10); }
+.print-card:nth-child(4) .btn-print:hover { box-shadow:0 5px 22px rgba(201,123,142,.18); border-color:rgba(201,123,142,.46); }
+
+
+/* ════════════════════════════════════════════════════════════
+   КАК ЗАКАЗАТЬ / HOW TO ORDER SECTION
+════════════════════════════════════════════════════════════ */
+
+#howto { position: relative; overflow: hidden; background: var(--bg); }
+
+/* Размытое фото на фоне / Blurred photo in background */
+.howto-bg {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url('../photos/nature/nature5.jpg');
+  background-size: cover; background-position: center;
+  opacity: .045; filter: blur(10px) saturate(.35);
+}
+.howto-bg-ov {
+  position: absolute; inset: 0; z-index: 1;
+  background: radial-gradient(ellipse at center, transparent 10%, var(--bg) 68%);
+}
+.howto-inner { position: relative; z-index: 2; }
+
+/* Сетка из 3 шагов / Grid of 3 steps */
+.howto-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px,2rem,40px);
+  margin-top: 0;
+}
+
+/* Карточка шага / Step card */
+.howto-step {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(12px,1rem,20px);
+  padding: clamp(24px,2.2rem,42px) clamp(20px,1.8rem,36px);
+  border-radius: clamp(16px,1.4rem,26px);
+  background: var(--frost);
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 28px rgba(0,0,0,.36), inset 0 1px 0 rgba(210,225,255,.07);
+  position: relative;
+  overflow: hidden;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+/* Цветная полоска сверху / Colored top stripe */
+.howto-step::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, var(--step-c, var(--teal)), transparent);
+  opacity: .7;
+}
+.howto-step:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 52px rgba(0,0,0,.48),
+    0 0 0 1px rgba(94,207,191,.14),
+    inset 0 1px 0 rgba(210,225,255,.10);
+}
+/* Акцентный цвет каждого шага / Accent color per step */
+.howto-step:nth-child(1) { --step-c: var(--teal); }
+.howto-step:nth-child(2) { --step-c: var(--indigo); }
+.howto-step:nth-child(3) { --step-c: #d2a028; }
+
+/* Большой номер шага / Large step number */
+.step-num {
+  font-family: 'Cormorant Upright', serif;
+  font-weight: 300;
+  font-size: clamp(44px,4rem,80px);
+  line-height: 1;
+  color: var(--step-c, var(--teal));
+  opacity: .35;
+  position: absolute;
+  top: clamp(12px,1rem,20px);
+  right: clamp(16px,1.4rem,28px);
+}
+/* Иконка шага / Step icon */
+.step-icon {
+  width: clamp(40px,3.2rem,60px);
+  height: clamp(40px,3.2rem,60px);
+  border-radius: clamp(12px,1rem,20px);
+  background: rgba(94,207,191,.10);
+  border: 1px solid rgba(94,207,191,.18);
+  display: flex; align-items: center; justify-content: center;
+}
+.howto-step:nth-child(2) .step-icon { background:rgba(139,156,248,.10); border-color:rgba(139,156,248,.18); }
+.howto-step:nth-child(3) .step-icon { background:rgba(210,160,40,.10);  border-color:rgba(210,160,40,.18); }
+.step-icon svg {
+  width: clamp(18px,1.5rem,28px);
+  height: clamp(18px,1.5rem,28px);
+  stroke-linecap: round; stroke-linejoin: round; fill: none;
+}
+.howto-step:nth-child(1) .step-icon svg { stroke: var(--teal); }
+.howto-step:nth-child(2) .step-icon svg { stroke: var(--indigo); }
+.howto-step:nth-child(3) .step-icon svg { stroke: #d2a028; }
+
+.step-title {
+  font-family: 'Cormorant Upright', serif;
+  font-weight: 300;
+  font-size: clamp(18px,1.6rem,30px);
+  color: var(--ice);
+  line-height: 1.2;
+}
+.step-desc {
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  font-size: clamp(12px,1rem,17px);
+  color: var(--subtle);
+  line-height: 1.8;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   О СЕБЕ / ABOUT SECTION
+════════════════════════════════════════════════════════════ */
+
+#about { position: relative; overflow: hidden; background: var(--bg2); }
+
+/* Фоновое фото / Background photo */
+.about-bg-img {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url('../photos/views/views4.jpg');
+  background-size: cover; background-position: center;
+  opacity: .06; filter: blur(12px) saturate(.4);
+}
+.about-bg-ov {
+  position: absolute; inset: 0; z-index: 1;
+  background: radial-gradient(ellipse at center, transparent 0%, var(--bg2) 66%);
+}
+
+/* Декоративные плавающие фото / Decorative floating photos */
+.about-float {
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none; overflow: hidden;
+}
+.about-float-item {
+  position: absolute;
+  border-radius: clamp(12px,1.2rem,22px);
+  overflow: hidden;
+}
+.about-float-item img { width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Двухколоночная сетка / Two-column grid */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px,4rem,80px);
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Рамка вокруг фото / Photo frame */
+.about-frame {
+  border-radius: clamp(18px,1.6rem,30px);
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 70px rgba(0,0,0,.52), inset 0 1px 0 rgba(210,225,255,.07);
+  position: relative;
+  transition: transform .4s ease, box-shadow .4s ease;
+}
+.about-frame:hover {
+  transform: scale(1.013) rotate(-.25deg);
+  box-shadow: 0 30px 90px rgba(0,0,0,.62), 0 0 0 1px rgba(94,207,191,.18);
+}
+/* Тил полоска сверху / Teal stripe on top */
+.about-frame::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px; z-index: 2;
+  background: linear-gradient(90deg, transparent, rgba(94,207,191,.48), rgba(139,156,248,.36), transparent);
+}
+.about-frame img {
+  width:100%; height:100%; object-fit:cover;
+  object-position: center top;
+  filter: brightness(.88) contrast(1.02);
+  display: block;
+}
+
+/* Бейдж «2+ года съёмки» / «2+ years» badge */
+.about-badge {
+  position: absolute;
+  bottom: clamp(-20px,-1.4rem,-10px);
+  right: clamp(-20px,-1.4rem,-10px);
+  z-index: 3;
+  border-radius: clamp(14px,1.2rem,22px);
+  padding: clamp(12px,1.1rem,22px) clamp(14px,1.3rem,26px);
+  background: rgba(14,17,24,.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 28px rgba(0,0,0,.42);
+  transition: transform .28s ease;
+}
+.about-wrap:hover .about-badge { transform: translateY(-4px); }
+.about-badge-num {
+  font-family: 'Cormorant Upright', serif;
+  font-size: clamp(24px,2.2rem,44px);
+  color: var(--teal); line-height: 1;
+}
+.about-badge-label {
+  font-size: clamp(9px,.78rem,14px);
+  color: var(--muted); letter-spacing: .09em; margin-top: 3px;
+}
+
+/* Текст о себе / About text */
+.about-text h2 {
+  font-family: 'Cormorant Upright', serif;
+  font-weight: 300;
+  font-size: clamp(24px,2.4rem,48px);
+  line-height: 1.18; color: var(--ice);
+  margin-bottom: clamp(16px,1.5rem,30px);
+}
+.about-text h2 em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--teal), var(--indigo));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.about-text p {
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  font-size: clamp(12px,1rem,18px);
+  color: var(--subtle); line-height: 1.88;
+  margin-bottom: clamp(12px,1rem,20px);
+}
+
+/* Список оборудования / Equipment list */
+.gear-list { margin-top: clamp(22px,2rem,40px); }
+.gear-item {
+  display: flex; align-items: center;
+  gap: clamp(10px,.9rem,18px);
+  padding: clamp(9px,.85rem,16px) 0;
+  border-bottom: 1px solid var(--border);
+  font-size: clamp(11px,.9rem,16px);
+  color: var(--subtle);
+  transition: color .22s, transform .22s;
+}
+.gear-item:last-child { border-bottom: none; }
+.gear-item:hover { color: var(--ice); transform: translateX(4px); }
+.gear-icon {
+  width: clamp(24px,2rem,40px); height: clamp(24px,2rem,40px);
+  border-radius: clamp(7px,.65rem,13px);
+  background: var(--teal-d); border: 1px solid rgba(94,207,191,.18);
+  display: flex; align-items: center; justify-content: center;
+  font-size: clamp(12px,1rem,18px); flex-shrink: 0;
+  transition: background .22s, transform .22s;
+}
+.gear-item:hover .gear-icon {
+  background: rgba(94,207,191,.22);
+  transform: scale(1.1) rotate(-4deg);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   КОНТАКТЫ / CONTACT SECTION
+════════════════════════════════════════════════════════════ */
+
+#contact {
+  position: relative; overflow: hidden; background: var(--bg);
+  padding: clamp(60px,6rem,130px) clamp(24px,4vw,80px);
+}
+.ct-bg {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url('../photos/effects/effects2.jpg');
+  background-size: cover; background-position: center;
+  opacity: .055; filter: blur(9px) saturate(.38);
+}
+.ct-bg-ov {
+  position: absolute; inset: 0; z-index: 1;
+  background: radial-gradient(ellipse at center, transparent 8%, var(--bg) 62%);
+}
+.ct-inner {
+  position: relative; z-index: 2;
+  max-width: min(720px, 92vw);
+  margin: 0 auto;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.ct-inner .section-tag { justify-content: center; }
+
+#contact h2 {
+  font-family: 'Cormorant Upright', serif;
+  font-weight: 300;
+  font-size: clamp(32px,3.6rem,78px);
+  line-height: 1.04; color: var(--ice);
+  margin-bottom: clamp(14px,1.2rem,22px);
+}
+#contact h2 em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--teal), var(--indigo));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.ct-inner > p {
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  color: var(--muted);
+  max-width: min(400px, 85vw);
+  margin: 0 auto clamp(30px,2.8rem,52px);
+  line-height: 1.82;
+  font-size: clamp(13px,1.1rem,20px);
+}
+
+/* Стеклянная карточка контактов / Glass contact card */
+.ct-card {
+  width: 100%;
+  border-radius: clamp(18px,1.6rem,30px);
+  padding: clamp(28px,2.8rem,56px) clamp(20px,2.2rem,48px);
+  background: var(--frost);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 44px rgba(0,0,0,.38), inset 0 1px 0 rgba(210,225,255,.08);
+  position: relative;
+  transition: transform .36s ease, box-shadow .36s ease;
+}
+.ct-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 64px rgba(0,0,0,.50), 0 0 0 1px rgba(94,207,191,.10);
+}
+.ct-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(94,207,191,.46), rgba(139,156,248,.36), transparent);
+}
+
+/* Строки с контактными данными / Contact info rows */
+.ct-contact-info { display: flex; flex-direction: column; gap: clamp(8px,.75rem,14px); margin-bottom: clamp(18px,1.8rem,32px); }
+.ct-contact-row {
+  display: flex; align-items: center;
+  gap: clamp(10px,.9rem,18px);
+  padding: clamp(10px,.95rem,18px) clamp(12px,1.1rem,22px);
+  border-radius: clamp(10px,.9rem,18px);
+  background: rgba(8,10,16,.45);
+  border: 1px solid var(--border);
+}
+.ct-contact-icon {
+  width: clamp(30px,2.5rem,50px); height: clamp(30px,2.5rem,50px);
+  border-radius: clamp(8px,.75rem,14px);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.ct-contact-icon svg { width:clamp(14px,1.2rem,22px); height:clamp(14px,1.2rem,22px); stroke-linecap:round; stroke-linejoin:round; }
+.ct-contact-icon.email-icon { background:rgba(94,207,191,.12); border:1px solid rgba(94,207,191,.2); }
+.ct-contact-icon.tg-icon    { background:rgba(139,156,248,.12); border:1px solid rgba(139,156,248,.2); }
+.ct-contact-icon.email-icon svg { stroke:var(--teal); fill:none; }
+.ct-contact-icon.tg-icon svg    { stroke:var(--indigo); fill:none; }
+.ct-contact-text { flex:1; text-align:left; }
+.ct-contact-label { font-size:clamp(8px,.68rem,12px); letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
+.ct-contact-val   { font-size:clamp(11px,.9rem,16px); color:var(--ice); }
+
+/* Кнопки связи / Contact buttons */
+.ct-btns { display:grid; grid-template-columns:1fr 1fr; gap:clamp(8px,.8rem,16px); }
+.btn-contact {
+  display:flex; align-items:center; justify-content:center;
+  gap:clamp(6px,.6rem,12px);
+  padding:clamp(12px,1.1rem,20px) clamp(14px,1.3rem,26px);
+  border-radius:100px;
+  font-family:'Inter',sans-serif;
+  font-size:clamp(9px,.78rem,14px);
+  letter-spacing:.15em; text-transform:uppercase;
+  text-decoration:none; cursor:none; transition:all .28s;
+}
+.btn-contact svg { width:clamp(13px,1.1rem,20px); height:clamp(13px,1.1rem,20px); flex-shrink:0; stroke-linecap:round; stroke-linejoin:round; }
+.btn-email    { border:1px solid rgba(94,207,191,.28);  color:var(--teal);   background:rgba(94,207,191,.08); }
+.btn-email svg { stroke:var(--teal); fill:none; }
+.btn-email:hover { background:rgba(94,207,191,.16); border-color:rgba(94,207,191,.5); transform:translateY(-2px); box-shadow:0 6px 24px rgba(94,207,191,.2); }
+.btn-telegram { border:1px solid rgba(139,156,248,.28); color:var(--indigo); background:rgba(139,156,248,.08); }
+.btn-telegram svg { stroke:var(--indigo); fill:none; }
+.btn-telegram:hover { background:rgba(139,156,248,.16); border-color:rgba(139,156,248,.5); transform:translateY(-2px); box-shadow:0 6px 24px rgba(139,156,248,.2); }
+
+
+/* ════════════════════════════════════════════════════════════
+   ФУТЕР / FOOTER
+════════════════════════════════════════════════════════════ */
+
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: clamp(18px,1.8rem,36px) clamp(24px,4vw,80px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.ft-logo {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(11px,1rem,18px);
+  color: var(--subtle); letter-spacing: .07em;
+}
+.ft-logo span { color: var(--teal); }
+footer p { font-size: clamp(9px,.78rem,14px); color: var(--muted); }
+.ft-links { display: flex; gap: clamp(14px,1.4rem,28px); }
+.ft-links a {
+  font-size: clamp(9px,.78rem,14px);
+  color: var(--muted); text-decoration: none;
+  letter-spacing: .12em; text-transform: uppercase;
+  transition: color .2s; position: relative;
+}
+.ft-links a::after {
+  content: '';
+  position: absolute; bottom: -2px; left: 0;
+  width: 0; height: 1px; background: var(--teal);
+  transition: width .24s;
+}
+.ft-links a:hover { color: var(--teal); }
+.ft-links a:hover::after { width: 100%; }
+
+/* ── КНОПКИ ГЕРОЯ / HERO BUTTONS ──────────────────────────── */
+.btn-primary {
+  padding: clamp(10px,.9rem,16px) clamp(22px,2rem,38px);
+  border-radius: 100px; border: none;
+  background: linear-gradient(135deg, var(--teal), var(--indigo));
+  color: #0e1118; font-family: 'Inter', sans-serif;
+  font-size: clamp(9px,.75rem,13px); letter-spacing: .18em; text-transform: uppercase;
+  text-decoration: none; cursor: none; font-weight: 400;
+  transition: transform .28s ease, box-shadow .28s ease;
+  box-shadow: 0 0 24px rgba(94,207,191,.28); display: inline-block;
+}
+.btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 36px rgba(94,207,191,.45); }
+.btn-primary:active { transform: scale(.97); }
+
+.btn-glass {
+  padding: clamp(10px,.9rem,16px) clamp(22px,2rem,38px);
+  border-radius: 100px; border: 1px solid var(--border);
+  background: var(--frost2); backdrop-filter: blur(16px);
+  color: var(--ice); font-family: 'Inter', sans-serif;
+  font-size: clamp(9px,.75rem,13px); letter-spacing: .18em; text-transform: uppercase;
+  text-decoration: none; cursor: none; transition: all .28s ease;
+  display: inline-block; position: relative; overflow: hidden;
+}
+.btn-glass::before { content:''; position:absolute; top:0;left:0;right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(210,225,255,.3),transparent); }
+.btn-glass:hover { background:var(--teal-d); border-color:rgba(94,207,191,.4); color:var(--teal); transform:translateY(-3px); }
+
+/* ── ЛАЙТБОКС / LIGHTBOX ──────────────────────────────────── */
+.lightbox { display:none; position:fixed; inset:0; z-index:9999; background:rgba(8,10,16,.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); align-items:center; justify-content:center; padding:clamp(20px,2vw,40px); }
+.lightbox.open { display:flex; animation:lbIn .28s ease; }
+@keyframes lbIn { from{opacity:0} to{opacity:1} }
+.lb-inner { border-radius:clamp(12px,1rem,20px); overflow:hidden; border:1px solid var(--border); box-shadow:0 28px 70px rgba(0,0,0,.8); max-width:88vw; max-height:86vh; animation:lbS .28s ease; }
+@keyframes lbS { from{transform:scale(.92)} to{transform:scale(1)} }
+.lb-inner img { display:block; max-width:88vw; max-height:86vh; object-fit:contain; }
+.lb-close { position:fixed; top:clamp(12px,1.2vw,24px); right:clamp(12px,1.2vw,24px); width:clamp(40px,3.2rem,60px); height:clamp(40px,3.2rem,60px); border-radius:50%; background:rgba(14,17,24,.90); backdrop-filter:blur(12px); border:1px solid rgba(210,225,255,.25); color:var(--ice); font-size:clamp(18px,1.5rem,28px); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; z-index:10000; -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
+.lb-close:hover,.lb-close:active { color:var(--teal); border-color:rgba(94,207,191,.5); transform:scale(1.1) rotate(90deg); }
+.lb-nav { position:fixed; top:50%; transform:translateY(-50%); width:clamp(40px,3.2rem,60px); height:clamp(40px,3.2rem,60px); border-radius:50%; background:rgba(14,17,24,.85); backdrop-filter:blur(10px); border:1px solid rgba(210,225,255,.22); color:var(--ice); font-size:clamp(16px,1.4rem,26px); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .22s; z-index:10000; -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
+.lb-nav:hover { color:var(--teal); border-color:rgba(94,207,191,.5); transform:translateY(-50%) scale(1.1); }
+.lb-prev { left:clamp(12px,1.2vw,24px); } .lb-next { right:clamp(12px,1.2vw,24px); }
